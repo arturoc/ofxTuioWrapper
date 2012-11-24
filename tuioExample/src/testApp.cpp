@@ -10,9 +10,9 @@ void testApp::setup(){
 	
 	
 	//Assign Global TUIO Callback Functions
-	ofAddListener(ofEvents.touchDown,this,&testApp::touchDown);
-	ofAddListener(ofEvents.touchUp,this,&testApp::touchUp);
-	ofAddListener(ofEvents.touchMoved,this,&testApp::touchMoved);
+	ofAddListener(ofEvents().touchDown,this,&testApp::touchDown);
+	ofAddListener(ofEvents().touchUp,this,&testApp::touchUp);
+	ofAddListener(ofEvents().touchMoved,this,&testApp::touchMoved);
 
 }
 
