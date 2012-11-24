@@ -54,9 +54,9 @@ public:
 	void updateTuioCursor(TuioCursor * tcur);
 	void removeTuioCursor(TuioCursor * tcur);
 	
-	void addTuioBlob(TuioBlob * tblb){}
-	void removeTuioBlob(TuioBlob * tblb){}
-	void updateTuioBlob(TuioBlob * tblb){}
+//	void addTuioBlob(TuioBlob * tblb){}
+//	void removeTuioBlob(TuioBlob * tblb){}
+//	void updateTuioBlob(TuioBlob * tblb){}
 
 	void refresh(TuioTime frameTime);
 	void drawCursors();
