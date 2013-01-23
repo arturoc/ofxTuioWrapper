@@ -8,12 +8,10 @@ void testApp::setup(){
 	//Connect to Port
 	myTuio.connect(3333);
 	
-	
 	//Assign Global TUIO Callback Functions
 	ofAddListener(ofEvents().touchDown,this,&testApp::touchDown);
 	ofAddListener(ofEvents().touchUp,this,&testApp::touchUp);
 	ofAddListener(ofEvents().touchMoved,this,&testApp::touchMoved);
-
 }
 
 //--------------------------------------------------------------

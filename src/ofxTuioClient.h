@@ -46,6 +46,10 @@ public:
 	void connect(int _port);
 	void disconnect();
 	
+	void flipInput180(bool flip){
+		bFlip = flip;
+	}
+
 	void addTuioObject(TuioObject * tobj);
 	void updateTuioObject(TuioObject * tobj);
 	void removeTuioObject(TuioObject * tobj);
@@ -73,7 +77,7 @@ public:
 	TuioClient * client;
 	
 protected:
-	bool bVerbose, bIsConnected;
+	bool bVerbose, bIsConnected, bFlip;
 };
 #endif
 

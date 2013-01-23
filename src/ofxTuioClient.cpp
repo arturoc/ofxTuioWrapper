@@ -33,7 +33,7 @@ void ofxTuioClient::connect(int port){
 	client->connect();
 	
 	if (!client->isConnected()) {
-		cout<<"Could not connect TUIO Client"<<endl;
+		ofLogError("Could not connect TUIO Client");
 	} else {
 	    bIsConnected = true;	
 	}
@@ -50,6 +50,7 @@ void ofxTuioClient::setVerbose(bool b){
 }
 
 void ofxTuioClient::drawCursors(){
+	ofPushStyle();
     std::list<TuioCursor*> cursorList = client->getTuioCursors();
 	std::list<TuioCursor*>::iterator tit;
 	client->lockCursorList();
@@ -57,7 +58,7 @@ void ofxTuioClient::drawCursors(){
 		TuioCursor * cur = (*tit);
 		//if(tcur!=0){
 			//TuioCursor cur = *tcur;
-			glColor3f(0.0,0.0,0.0);
+			ofSetColor(0.0,0.0,0.0);
 			ofEllipse(cur->getX()*ofGetWidth(), cur->getY()*ofGetHeight(), 10.0, 10.0);
 			string str = "SessionId: "+ofToString((int)(cur->getSessionID()));
 			ofDrawBitmapString(str, cur->getX()*ofGetWidth()-10.0, cur->getY()*ofGetHeight()+25.0);
@@ -66,9 +67,11 @@ void ofxTuioClient::drawCursors(){
 		//}
 	}
 	client->unlockCursorList();
+	ofPopStyle();
 }
 
 void ofxTuioClient::drawObjects(){
+	ofPushStyle();
     std::list<TuioObject*> objectList = client->getTuioObjects();
 	list<TuioObject*>::iterator tobj;
 	client->lockObjectList();
@@ -88,10 +91,15 @@ void ofxTuioClient::drawObjects(){
 		ofDrawBitmapString(str, obj->getX()*ofGetWidth()-10.0, obj->getY()*ofGetHeight()+40.0);
 	}
 	client->unlockObjectList();
+	ofPopStyle();
 }
 
 void ofxTuioClient::addTuioObject(TuioObject *tobj) {
 	
+	if(bFlip){
+		tobj->setX(1.f - tobj->getX());
+		tobj->setY(1.f - tobj->getY());
+	}
 	ofNotifyEvent(objectAdded, *tobj, this);
 	
 	if (bVerbose)
@@ -101,6 +109,10 @@ void ofxTuioClient::addTuioObject(TuioObject *tobj) {
 
 void ofxTuioClient::updateTuioObject(TuioObject *tobj) {
 	
+	if(bFlip){
+		tobj->setX(1.f - tobj->getX());
+		tobj->setY(1.f - tobj->getY());
+	}
 	ofNotifyEvent(objectUpdated, *tobj, this);
 	
 	if (bVerbose) 	
@@ -111,6 +123,10 @@ void ofxTuioClient::updateTuioObject(TuioObject *tobj) {
 
 void ofxTuioClient::removeTuioObject(TuioObject *tobj) {
 	
+	if(bFlip){
+		tobj->setX(1.f - tobj->getX());
+		tobj->setY(1.f - tobj->getY());
+	}
 	ofNotifyEvent(objectRemoved, *tobj, this);
 	
 	if (bVerbose)
@@ -123,6 +139,11 @@ void ofxTuioClient::addTuioCursor(TuioCursor *tcur) {
 	touch.y=tcur->getY();
 	touch.id=tcur->getSessionID();
 	
+	if(bFlip){
+		touch.x = 1.f - touch.x;
+		touch.y = 1.f - touch.y;
+	}
+
 	ofNotifyEvent(ofEvents().touchDown, touch, this);
 	
 	if (bVerbose) 
@@ -137,6 +158,11 @@ void ofxTuioClient::updateTuioCursor(TuioCursor *tcur) {
 	touch.y=tcur->getY();
 	touch.id=tcur->getSessionID();
 	
+	if(bFlip){
+		touch.x = 1.f - touch.x;
+		touch.y = 1.f - touch.y;
+	}
+
 	ofNotifyEvent(ofEvents().touchMoved, touch, this);
 	
 	if (bVerbose) 	
@@ -151,6 +177,11 @@ void ofxTuioClient::removeTuioCursor(TuioCursor *tcur) {
 	touch.y=tcur->getY();
 	touch.id=tcur->getSessionID();
 	
+	if(bFlip){
+		touch.x = 1.f - touch.x;
+		touch.y = 1.f - touch.y;
+	}
+
 	ofNotifyEvent(ofEvents().touchUp, touch, this);
 	
 	if (bVerbose)

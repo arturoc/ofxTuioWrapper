@@ -157,6 +157,14 @@ namespace TUIO {
 			return ypos;
 		};
 		
+		void setX(float x){
+			xpos = x;
+		}
+
+		void setY(float y){
+			ypos = y;
+		}
+
 		/**
 		 * Returns the distance to the provided coordinates 
 		 *
