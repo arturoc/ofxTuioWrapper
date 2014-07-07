@@ -56,6 +56,7 @@ void ofxTuioServer::updateObject(TuioObject * _tobj, float _nx, float _ny, float
 
 //remove them
 void ofxTuioServer::removeCursor(TuioCursor * _tcur){
+	if(verbose) cout<<"ofxTuioServer: remove TUIO Cursor " << _tcur->getCursorID()<<endl;
 	tuioServer->removeTuioCursor(_tcur);
 }
 
