@@ -104,6 +104,8 @@ namespace TUIO {
 			rotation_accel = 0.0f;
 		};
 		
+		TuioObject(){}
+
 		/**
 		 * The destructor is doing nothing in particular. 
 		 */

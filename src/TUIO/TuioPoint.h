@@ -59,6 +59,13 @@ namespace TUIO {
 		TuioTime startTime;
 		
 	public:
+		TuioPoint()
+		:xpos(0)
+		,ypos(0)
+		,currentTime(TuioTime::getSessionTime())
+		,startTime(currentTime){
+
+		}
 		/**
 		 * The default constructor takes no arguments and sets   
 		 * its coordinate attributes to zero and its time stamp to the current session time.

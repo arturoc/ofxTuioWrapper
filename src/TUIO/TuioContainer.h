@@ -133,6 +133,8 @@ namespace TUIO {
 			state = TUIO_ADDED;
 		};
 		
+		TuioContainer(){}
+
 		/**
 		 * The destructor is doing nothing in particular. 
 		 */
