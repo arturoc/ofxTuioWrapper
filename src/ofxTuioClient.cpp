@@ -94,13 +94,38 @@ void ofxTuioClient::drawObjects(){
 	ofPopStyle();
 }
 
+void ofxTuioClient::update(){
+	TuioObject tobj;
+	while(objectAddedQueue.tryReceive(tobj)){
+		ofNotifyEvent(objectAdded, tobj, this);
+	}
+	while(objectUpdatedQueue.tryReceive(tobj)){
+		ofNotifyEvent(objectUpdated, *tobj, this);
+	}
+	while(objectRemovedQueue.tryReceive(tobj)){
+		ofNotifyEvent(objectRemoved, *tobj, this);
+	}
+
+	ofTouchEventArgs touch;
+	while(touchAddedQueue.tryReceive(touch)){
+		ofNotifyEvent(ofEvents().touchDown, touch, this);
+	}
+	while(touchUpdatedQueue.tryReceive(touch)){
+		ofNotifyEvent(ofEvents().touchMoved, touch, this);
+	}
+	while(touchRemovedQueue.tryReceive(touch)){
+		ofNotifyEvent(ofEvents().touchUp, touch, this);
+	}
+}
+
+
 void ofxTuioClient::addTuioObject(TuioObject *tobj) {
 	
 	if(bFlip){
 		tobj->setX(1.f - tobj->getX());
 		tobj->setY(1.f - tobj->getY());
 	}
-	ofNotifyEvent(objectAdded, *tobj, this);
+	objectAddedQueue.send(*tobj);
 	
 	if (bVerbose)
 		std::cout << "add obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << ") "<< tobj->getX() << " " << tobj->getY() << " " << tobj->getAngle() << std::endl;
@@ -113,7 +138,7 @@ void ofxTuioClient::updateTuioObject(TuioObject *tobj) {
 		tobj->setX(1.f - tobj->getX());
 		tobj->setY(1.f - tobj->getY());
 	}
-	ofNotifyEvent(objectUpdated, *tobj, this);
+	objectUpdatedQueue.send(*tobj);
 	
 	if (bVerbose) 	
 		std::cout << "set obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << ") "<< tobj->getX() << " " << tobj->getY() << " " << tobj->getAngle() 
@@ -127,7 +152,7 @@ void ofxTuioClient::removeTuioObject(TuioObject *tobj) {
 		tobj->setX(1.f - tobj->getX());
 		tobj->setY(1.f - tobj->getY());
 	}
-	ofNotifyEvent(objectRemoved, *tobj, this);
+	objectRemovedQueue.send(*tobj);
 	
 	if (bVerbose)
 		std::cout << "del obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << ")" << std::endl;
@@ -144,7 +169,7 @@ void ofxTuioClient::addTuioCursor(TuioCursor *tcur) {
 		touch.y = 1.f - touch.y;
 	}
 
-	ofNotifyEvent(ofEvents().touchDown, touch, this);
+	touchAddedQueue.send(touch);
 	
 	if (bVerbose) 
 		std::cout << "add cur " << tcur->getCursorID() << " (" <<  tcur->getSessionID() << ") " << tcur->getX() << " " << tcur->getY() << std::endl;
@@ -162,8 +187,7 @@ void ofxTuioClient::updateTuioCursor(TuioCursor *tcur) {
 		touch.x = 1.f - touch.x;
 		touch.y = 1.f - touch.y;
 	}
-
-	ofNotifyEvent(ofEvents().touchMoved, touch, this);
+	touchUpdatedQueue.send(touch);
 	
 	if (bVerbose) 	
 		std::cout << "set cur " << tcur->getCursorID() << " (" <<  tcur->getSessionID() << ") " << tcur->getX() << " " << tcur->getY() 
@@ -181,8 +205,7 @@ void ofxTuioClient::removeTuioCursor(TuioCursor *tcur) {
 		touch.x = 1.f - touch.x;
 		touch.y = 1.f - touch.y;
 	}
-
-	ofNotifyEvent(ofEvents().touchUp, touch, this);
+	touchRemovedQueue.send(touch);
 	
 	if (bVerbose)
 		std::cout << "del cur " << tcur->getCursorID() << " (" <<  tcur->getSessionID() << ")" << std::endl;

@@ -42,7 +42,7 @@ public:
 	~ofxTuioClient() {
 		disconnect();
 	}
-	
+	void update();
 	void connect(int _port);
 	void disconnect();
 	
@@ -78,6 +78,8 @@ public:
 	
 protected:
 	bool bVerbose, bIsConnected, bFlip;
+	ofThreadChannel<TuioObject> objectAddedQueue, objectRemovedQueue, objectUpdatedQueue;
+	ofThreadChannel<ofTouchEventArgs> touchAddedQueue, touchRemovedQueue, touchUpdatedQueue;
 };
 #endif
 
