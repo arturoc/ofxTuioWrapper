@@ -100,10 +100,10 @@ void ofxTuioClient::update(){
 		ofNotifyEvent(objectAdded, tobj, this);
 	}
 	while(objectUpdatedQueue.tryReceive(tobj)){
-		ofNotifyEvent(objectUpdated, *tobj, this);
+		ofNotifyEvent(objectUpdated, tobj, this);
 	}
 	while(objectRemovedQueue.tryReceive(tobj)){
-		ofNotifyEvent(objectRemoved, *tobj, this);
+		ofNotifyEvent(objectRemoved, tobj, this);
 	}
 
 	ofTouchEventArgs touch;
