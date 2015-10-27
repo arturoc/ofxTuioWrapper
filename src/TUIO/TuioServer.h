@@ -392,7 +392,7 @@ namespace TUIO {
 		std::list<TuioCursor*> freeCursorList;
 		std::list<TuioCursor*> freeCursorBuffer;
 		
-		UdpTransmitSocket *socket;	
+		osc::UdpTransmitSocket *socket;
 		osc::OutboundPacketStream  *oscPacket;
 		char *oscBuffer; 
 		osc::OutboundPacketStream  *fullPacket;

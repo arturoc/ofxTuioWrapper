@@ -59,7 +59,7 @@ namespace TUIO {
 	 * @author Martin Kaltenbrunner
 	 * @version 1.4
 	 */ 
-	class TuioClient : public PacketListener { 
+	class TuioClient : public osc::PacketListener {
 		
 	public:
 		/**
@@ -164,11 +164,11 @@ namespace TUIO {
 		 */
 		void unlockCursorList();
 
-		void ProcessPacket( const char *data, int size, const IpEndpointName &remoteEndpoint );
-		UdpListeningReceiveSocket *socket;
+		void ProcessPacket( const char *data, int size, const osc::IpEndpointName &remoteEndpoint );
+		osc::UdpListeningReceiveSocket *socket;
 				
 	protected:
-		void ProcessBundle( const osc::ReceivedBundle& b, const IpEndpointName& remoteEndpoint);
+		void ProcessBundle( const osc::ReceivedBundle& b, const osc::IpEndpointName& remoteEndpoint);
 		
 		/**
 		 * The OSC callback method where all TUIO messages are received and decoded
@@ -177,7 +177,7 @@ namespace TUIO {
 		 * @param  message		the received OSC message
 		 * @param  remoteEndpoint	the received OSC message origin
 		 */
-		void ProcessMessage( const osc::ReceivedMessage& message, const IpEndpointName& remoteEndpoint);
+		void ProcessMessage( const osc::ReceivedMessage& message, const osc::IpEndpointName& remoteEndpoint);
 		
 	private:
 		std::list<TuioListener*> listenerList;
