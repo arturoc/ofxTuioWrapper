@@ -21,7 +21,6 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	
 	//render TUIO Cursors and Objects
 	myTuio.drawCursors();
 	myTuio.drawObjects();
@@ -64,26 +63,20 @@ void testApp::windowResized(int w, int h){
 
 
 void testApp::touchDown(ofTouchEventArgs & touch){
-	cout << " cursor added: " + ofToString(touch.id)+
+	ofLogNotice("testApp::touchDown") << " cursor added: " + ofToString(touch.id)+
 	" X: "+ofToString(touch.x)+
-	" Y: "+ofToString(touch.y)
-	<< endl;
-
-	
+	" Y: "+ofToString(touch.y);
 }
 
 void testApp::touchUp(ofTouchEventArgs & touch){
-	cout << " cursor removed: " + ofToString(touch.id)+
+	ofLogNotice("testApp::touchUp") << " cursor removed: " + ofToString(touch.id)+
 	 " X: "+ofToString(touch.x)+
-	 " Y: "+ofToString(touch.y)
-	 << endl;
-	
+	 " Y: "+ofToString(touch.y);
 }
 
 void testApp::touchMoved(ofTouchEventArgs & touch){
-	cout << " cursor updated: " + ofToString(touch.id)+
+	ofLogNotice("testApp::touchMoved") << " cursor updated: " + ofToString(touch.id)+
 	 " X: "+ofToString(touch.x)+
-	 " Y: "+ofToString(touch.y)
-	 << endl;
+	 " Y: "+ofToString(touch.y);
 }
 
