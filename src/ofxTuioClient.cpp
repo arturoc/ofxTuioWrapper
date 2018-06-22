@@ -108,13 +108,13 @@ void ofxTuioClient::update(){
 
 	ofTouchEventArgs touch;
 	while(touchAddedQueue.tryReceive(touch)){
-		ofNotifyEvent(ofEvents().touchDown, touch, this);
+		ofNotifyEvent(touchDown, touch, this);
 	}
 	while(touchUpdatedQueue.tryReceive(touch)){
-		ofNotifyEvent(ofEvents().touchMoved, touch, this);
+		ofNotifyEvent(touchMoved, touch, this);
 	}
 	while(touchRemovedQueue.tryReceive(touch)){
-		ofNotifyEvent(ofEvents().touchUp, touch, this);
+		ofNotifyEvent(touchUp, touch, this);
 	}
 }
 
