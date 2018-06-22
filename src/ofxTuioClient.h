@@ -67,6 +67,10 @@ public:
 	void drawObjects();
 	
 	void setVerbose(bool b);
+
+	ofEvent<ofTouchEventArgs> touchDown;
+	ofEvent<ofTouchEventArgs> touchMoved;
+	ofEvent<ofTouchEventArgs> touchUp;
 	
 	//OF POCO EVENTS TO FORWARD TUIO EVENTS TO testApp or any other Class
 	
