@@ -22,7 +22,7 @@
 #ifndef INCLUDED_TUIOCLIENT_H
 #define INCLUDED_TUIOCLIENT_H
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <pthread.h>
 #include <sys/time.h>
 #else
