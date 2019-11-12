@@ -44,6 +44,11 @@ public:
 	TuioCursor * addCursor(float _x, float _y);
 	TuioObject * addObject(int _sid, float _x, float _y, float _a);
 
+	TuioObject * getTuioObject(int _sid);
+	std::list<TuioObject*>  getTuioObjects();
+
+	TuioCursor * getTuioCursor(int _sid);
+
 	void updateCursor(TuioCursor * _tcur, float _nx, float _ny);
 	void updateObject(TuioObject * _tobj, float _nx, float _ny, float _ang);
 
