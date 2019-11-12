@@ -140,3 +140,18 @@ void ofxTuioServer::drawObjects(){
 	}
 
 }
+
+TuioObject * ofxTuioServer::getTuioObject(int _sid)
+{
+	return tuioServer->getTuioObject(_sid);
+}
+
+std::list<TuioObject*> ofxTuioServer::getTuioObjects()
+{
+	return tuioServer->getTuioObjects();
+}
+
+TuioCursor * ofxTuioServer::getTuioCursor(int _sid)
+{
+	return tuioServer->getTuioCursor(_sid);
+}

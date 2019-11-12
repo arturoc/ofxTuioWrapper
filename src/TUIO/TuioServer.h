@@ -22,7 +22,7 @@
 #ifndef INCLUDED_TuioServer_H
 #define INCLUDED_TuioServer_H
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <pthread.h>
 #include <sys/time.h>
 #else
